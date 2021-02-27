@@ -1,0 +1,10 @@
+steps:
+  - label: "Build Image"
+    command:
+      - cd LucyWebsite
+      - docker build -t webimage .
+  - label: "Run Container"
+    command:
+    - docker run -d -p 8080:80 --name dockerimage webimage
+  - block: "Shutdown"
+  - command: docker stop dockerimage
