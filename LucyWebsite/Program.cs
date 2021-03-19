@@ -36,10 +36,7 @@ namespace LucyWebsite
 
             var host = builder.Build();
 
-            host.Services
-              .UseBootstrapProviders()
-              .UseFontAwesomeIcons();
-
+            
             await host.RunAsync();
         }
     }
