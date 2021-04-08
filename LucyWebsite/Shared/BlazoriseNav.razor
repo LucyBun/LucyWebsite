@@ -1,35 +1,49 @@
-﻿<Sidebar Data="@sidebarInfo" />
+﻿
+<Sidebar Data="@sidebarInfo" />
+<button class="btn btn-primary" @onclick="clickbutton">Click me</button>
 
 @code{
     Sidebar sidebar;
+    SidebarInfo sidebarInfo;
+    protected override void OnInitialized(){
 
-    SidebarInfo sidebarInfo = new SidebarInfo
-    {
-        Brand = new SidebarBrandInfo
+        sidebarInfo = new SidebarInfo
         {
-            Text = "Blazorise Demo"
-        },
-        Items = new List<SidebarItemInfo>
-    {
-            new SidebarItemInfo { To = "", Text = "Dashboard" },
-            new SidebarItemInfo
+            Brand = new SidebarBrandInfo
             {
-                Text = "Email",
-                Icon = IconName.Mail,
-                SubItems = new List<SidebarItemInfo>
-            {
-                    new SidebarItemInfo { To = "email/inbox", Text = "Inbox" },
-                    new SidebarItemInfo { To = "email/compose", Text = "Compose Email" },
-                }
+                Text = "Blazorise Demo"
             },
-            new SidebarItemInfo
-            {
-                Text = "Applications",
-                SubItems = new List<SidebarItemInfo>
-            {
-                    new SidebarItemInfo { To = "apps/todo", Text = "Todo List" }
-                }
-            },
-        }
-    };
+            Items = new List<SidebarItemInfo>
+        {
+                new SidebarItemInfo { To = "", Text = "Dashboard" },
+                new SidebarItemInfo
+                {
+                    Text = "Email",
+                    Icon = IconName.Mail,
+                    SubItems = new List<SidebarItemInfo>
+                {
+                        new SidebarItemInfo { To = "email/inbox", Text = "Inbox" },
+                        new SidebarItemInfo { To = "email/compose", Text = "Compose Email" },
+                    }
+                },
+                new SidebarItemInfo
+                {
+                    Text = "Applications",
+                    SubItems = new List<SidebarItemInfo>
+                {
+                        new SidebarItemInfo { To = "apps/todo", Text = "Todo List" }
+                    }
+                },
+            }
+        };
+
+        
+        
+    }
+
+    private void clickbutton(){
+        string sidebarstring = JsonSerializer.Serialize(sidebarInfo, new JsonSerializerOptions{WriteIndented = true});
+        File.WriteAllText("fileName", sidebarstring);
+    }
+    
 }
